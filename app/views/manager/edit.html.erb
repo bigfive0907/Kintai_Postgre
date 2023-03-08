@@ -1,0 +1,32 @@
+<div class="main users-edit">
+  <div class="container">
+
+    <div class="form-heading">管理者情報の変更</div>
+    
+    <div class="form users-form">
+      <div class="form-body">
+        <% if @error_message %>
+          <div class="error">
+            <%= @error_message %>
+          </div>
+        <% end %>
+
+        <%= form_tag("/manager/#{params[:id]}/update") do %>
+          
+          <p>新しいメールアドレス</p>
+          <input name="email" value="<%= @manager.email %>">
+          <p>新しい電話番号</p>
+          <input name="tell" value ="<%= @manager.tell %>">
+          <p>新しいパスワード</p>
+          <input name="password" value ="<%= @manager.password %>" type="password">
+
+          <input type="submit" value="変更を反映">
+        <% end %>
+
+        
+      </div>
+      
+    </div>
+    <%= link_to("← 戻る","/",class:"sbtn") %>
+  </div>
+</div>

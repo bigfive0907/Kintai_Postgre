@@ -1,0 +1,54 @@
+<div class="main top-main">
+  <div class="top-message">
+    
+    
+    <div id="ClockArea" class="clock"></div>
+    
+
+  </div>
+  <div class="sub-message">
+    
+    <div class="Log content">
+    
+    <table>
+    <tr>
+      <th>勤務時間</th>
+      <th>内容</th>
+    <tr>
+    
+
+    <% @record.each do |record| %>
+    <% weeks = ["月","火","水","木","金","土","日"]%>
+    <% index = record.time.utc.strftime("%u").to_i%>
+    <tr>
+      <td><%= record.time.utc.strftime("%-m/%-d(#{weeks[index-1]}) %-H:%-M:%-S") %></td>
+      <td><%= record.status %></td>
+      <!-- 勤務時間の 出勤-退勤 休憩時間　残業時間-->
+    </tr>
+    
+    <% end %>
+    </table>
+    </div>
+    
+    <ul class="menu content">
+    
+      <%= link_to("出勤", "/work_s", class:"btn") %>
+      <%= link_to("退勤", "/work_e", class:"btn rev") %>
+
+      <ul class="idle">
+      <li><%= link_to("休憩開始", "/idle_s", class:"btn ") %></li>
+      <li><%= link_to("休憩終了", "/idle_e", class:"btn rev" ) %></li>
+      </ul>
+      <ul class="over">
+      <li><%= link_to("残業開始", "/over_s", class:"btn ") %></li>
+      <li><%= link_to("残業終了", "/over_e", class:"btn rev") %></li>
+      </ul>
+     
+    </ul>
+    
+  </div>
+
+  
+</div>
+  
+</div>

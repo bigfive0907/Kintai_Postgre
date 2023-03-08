@@ -1,0 +1,78 @@
+
+
+<%= form_tag("/dateSearch") do %>
+  <div class="date">
+    <p class="left_w">ID</p>
+    <input name="id" value="<%= @id %>"class="id_form">
+
+  
+    <input name="year" value="<%= @year %>" class="right_w">
+    <p>年</p>
+  
+
+    <input name="month" value="<%= @month %>" class="right_w">
+    <p>月</p>
+  
+    
+    <input type="submit" value="指定日時で検索" class="btn_search">
+    
+  </div>
+<% end %>
+<hr>
+
+<li><%= link_to("ユーザー情報の編集","/users/:id/edit") %></li>
+<div class="stats">
+<p><%= @user.name%> : <%= @year%> / <%= @month%></p>
+    <table>
+    <tr>
+      
+      <th>年</th>
+      <th>月</th>
+      <th>日</th>
+      <th>名前</th>
+      <th>勤務時間</th>
+      <th>休憩時間</th>
+      <th>残業時間</th>
+      
+    <tr>
+    <% total_w=0%>
+    <% total_i=0%>
+    <% total_o=0%>
+    <% if @stats%>
+      
+      <% @stats.each do |statistics| %>
+      <tr>
+        <td><%= statistics.year %></td>
+        <td><%= statistics.month %></td>
+        <td><%= statistics.day %></td>
+        <td><%= statistics.name%></td>
+
+        <td><%= Time.at(statistics.worktime).utc.strftime('%X') %></td>
+        <td><%= Time.at(statistics.idletime).utc.strftime('%X') %></td>
+        <td><%= Time.at(statistics.overtime).utc.strftime('%X') %></td>
+        <% total_w += statistics.worktime %>
+        <% total_i += statistics.idletime %>
+        <% total_o += statistics.overtime %>
+
+        <!-- 勤務時間の 名前 勤務時間 休憩時間　残業時間-->
+      </tr>
+      <% end %>
+    
+    <% end %>
+    </table>
+    <hr>
+    <table>
+    <tr>
+      <th>総勤務時間</th>
+      <th>総休憩時間</th>
+      <th>総残業時間</th>
+    </tr>
+    <tr>
+      <td><%= Time.at(total_w).utc.strftime('%X')%></td>
+      <td><%= Time.at(total_i).utc.strftime('%X')%></td>
+      <td><%= Time.at(total_o).utc.strftime('%X')%></td>
+    </tr>
+    </table>
+
+    <%= link_to("← 戻る","/show",class:"sbtn") %>
+</div>

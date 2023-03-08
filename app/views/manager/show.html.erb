@@ -1,0 +1,26 @@
+<div class="userlist">
+  <h2>従業員リスト</h2>
+    <div class="user">
+    <p>※ 名前を押すと勤務時間が確認できます</p>
+    <table>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      
+      <th>電話番号</th>
+    <tr>
+    <% @manager.each do|manager|%>
+    <tr>
+      <td><%= manager.id%></td>
+      <td><%= manager.name %></td>
+      <td><%= manager.email %></td>
+      <td><%= manager.tell %></td>
+    </tr>
+    <% end %>
+    </table>
+    <hr>
+    
+    <%= link_to("← 戻る","/manager",class:"sbtn") %>
+    </div>
+</div>

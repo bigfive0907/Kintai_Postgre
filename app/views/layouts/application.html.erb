@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <html lang ="ja">
+  <head>
+    <title>KintaiApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'style.css' %> 
+    
+    
+    <%= javascript_importmap_tags %> 
+    <%= javascript_include_tag 'index.js' %>
+  </head>
+  <body>
+  <header>
+  <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+  <% end %>
+  <div class="header-logo">
+    <%= link_to("焼肉ジューシー", "/") %>
+  </div>
+  <% if @current_user%>
+    <div class="header-menu">
+    
+    <li><%= link_to("#{@current_user.name}","/users/#{@current_user.id}/edit")%></li>
+    <li><%= link_to("ログアウト","/logout") %></li>
+    </div>
+  <% end %>    
+
+  <% if @current_manager%>
+  <div class="header-menu">
+  <li><%= link_to("#{@current_manager.name}","/manager/:id/edit")%></li>
+  
+  <li><%= link_to("ログアウト","/logout") %></li>
+  </div>
+  <% end %>
+  </header>
+    <%= yield %>
+
+  </body>
+</html>
