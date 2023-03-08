@@ -30,6 +30,7 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー情報が更新されました"
       redirect_to("/employee")
     else
+      flash[:notice] = "ユーザー情報の更新に失敗しました"
       render("users/edit")
     end
 
@@ -53,15 +54,17 @@ class UsersController < ApplicationController
       @name = params[:name]
       @email = params[:email]
       @password = params[:password]
-      render("users/create")
+      render("users/new")
     end
   end
 
   def login
     
     @user = User.find_by(name: params[:name])
-    @record = Record.find_by(name: @user.name)
+    
+
     if @user && @user.authenticate(params[:password])
+      @record = Record.find_by(name: @user.name)
       session[:user_id] = @user.id
       flash[:notice] = "従業員としてログインしました"
       if @current_manager
@@ -74,7 +77,7 @@ class UsersController < ApplicationController
       @email = params[:email]
       @password = ""
       
-      render("login_form")
+      render("users/login_form")
     end
     
   end
@@ -95,35 +98,6 @@ class UsersController < ApplicationController
     
   end
 
-=begin
-  require 'csv'
-
-
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html
-      format.csv do |csv|
-        send_users_csv(@users)
-      end
-    end
-  end
-
-  def send_users_csv(users)
-    csv_data = CSV.generate do |csv|
-      header = %w(id name email tell)
-      csv << header
-
-      users.each do |user|
-        values = [user.id,user.name,user.email,user.tell]
-        csv << values
-      end
-
-    end
-    send_data(csv_data, filename: "users.csv")
-  end
-=end
 
 end
 

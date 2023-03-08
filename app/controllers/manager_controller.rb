@@ -26,6 +26,7 @@ class ManagerController < ApplicationController
       flash[:notice] = "ユーザー情報が更新されました"
       redirect_to("/manager")
     else
+      flash[:notice] = "ユーザー情報の更新に失敗しました"
       render("manager/edit")
     end
 

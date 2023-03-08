@@ -1,11 +1,13 @@
 <div class="main users-new">
   <div class="container">
+
     <div class="form-heading">管理者としてログイン</div>
+
     <div class="form users-form">
       <div class="form-body">
         <% if @error_message %>
           <div class="error">
-            <h2><%= @error_message %></h2>
+            <%= @error_message %>
           </div>
         <% end %>
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  root "home#top"
   
   get 'statistics/index'
   get 'manager/index'
