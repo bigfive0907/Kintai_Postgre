@@ -1,6 +1,6 @@
 
 # --勤怠管理アプリ README--
-https://kintai-chiba2023.herokuapp.com
+https://kintai0803-7d551290b90c.herokuapp.com
 
 上のリンクで現在公開しています。
 
